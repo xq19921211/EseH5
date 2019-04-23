@@ -1,0 +1,126 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+._title{
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+.joe{
+  height:0.3rem;
+  background: #e6f3f3;
+  margin-top: 0.3rem;
+}
+.red{
+  color: red;
+}
+.van-nav-bar{
+  background:#26a5f1;
+  display: flex;
+  justify-content: space-around;
+}
+.van-nav-bar__arrow,.van-nav-bar__title{
+  color: #fff;
+  font-size:1.5rem;
+}
+.van-cell__title{
+  font-size:1.5rem;
+  padding-top:1rem;
+}
+.job{
+  background: #e6f3f3;
+}
+.job>p{
+  padding-bottom: 0.5rem;
+  font-size:1.2rem;
+  font-weight:700;
+}
+.job>h2{
+  padding:2rem 0 2rem
+}
+.details>p{
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  font-size:1rem;
+  font-weight:700;
+  display: flex;
+  justify-content: space-between;
+}
+.van-icon-manager{
+ font-size:3rem;
+ line-height: 5rem
+}
+.order{
+  display: flex;
+  justify-content:space-around;
+  height:5rem
+}
+.order_p{
+  margin-left:-4rem;
+}
+.order_p>p{
+  padding:0.5rem
+}
+.van-icon-phone-o{
+  font-size:2rem;
+  line-height:4rem;
+  color: #26a5f1
+}
+.van-button--large{
+  position: fixed;
+  left:0;
+  bottom:0;
+  color: #fff;
+}
+.btn_color{
+  background: #d1d1d1;
+  color: #f00;
+}
+.task_del{
+  padding:1rem 1rem;
+}
+.task_del>p{
+  padding:0.6rem
+}
+.place{
+  height:15rem;
+}
+.pop_t{
+  display: flex;
+  justify-content: space-between;
+  font-size:1.2rem;
+  padding:0.5rem 1rem;
+  border-bottom: 2px solid #e1e1e1
+}
+.pop_t>span{
+  color: #26a5f1
+}
+.pop_m{
+  padding:1rem;
+  text-align: left
+}
+.pop_m>i{
+  font-size:2rem;
+  margin-right: 1rem
+}
+.photo{
+  width: 100%;
+  height: 18rem;
+}
+.photograph{
+  width:30%;
+  height:50%;
+  border:1px solid #d1d1d1;
+  margin-left:3rem
+}
+.photograph van-icon{
+  display: flex;
+  align-items: center;
+}
+.van-uploader{
+ top:4rem;
+}
+.cc{
+  display: none;
+}
