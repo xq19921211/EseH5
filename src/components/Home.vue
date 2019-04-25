@@ -93,7 +93,7 @@
        </p>
        <p class="pop_m">
          <i class="van-icon van-icon-location-o"><!--定位--></i>
-         <span>获取当前定位</span>
+         <span @click="city">{{LocationCity}}</span>
        </p>
        <div class="photo">
         <div class="photograph">
@@ -109,6 +109,7 @@
          size="large"
          @click="change"
          :style="{background:btn_color}"
+         color="#fff"
         >{{dan}}
         </van-button>
      </div>
@@ -126,6 +127,7 @@ import {Icon,
  Step, 
  Steps
  } from 'Vant'
+import BMap from 'BMap'
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Step).use(Steps)
 Vue.use(Icon, Dialog, Uploader, Popup)
@@ -138,17 +140,44 @@ export default {
       btn_color:"#26a5f1",
       show:false,
       iscc:true,
-      timer: null
+      timer: null,
+      LocationCity:"正在定位",
+      location: null
      }
   },
+  mounted(){
+      this.city()    //触发获取城市方法
+      let _this = this
+      var geolocation = new BMap.Geolocation()
+      geolocation.getCurrentPosition(function(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+          const myGeo = new BMap.Geocoder()
+          myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), data => {
+            if (data.addressComponents) {
+              const result = data.addressComponents
+              const location = {
+                creditLongitude: r.point.lat, // 经度
+                creditLatitude: r.point.lng, // 纬度
+                creditProvince: result.province || '', // 省
+                creditCity: result.city || '', // 市
+                creditArea: result.district || '', // 区
+                creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
+              }
+              _this.location = location
+            }
+          })
+        }
+      })
+    },
   updated (){
     if(this.dan=='等待验收'){
         this.timer=setTimeout(()=>{
         this.state='已完成'
         this.dan='订单已完成'
         this.iscc=false
-      },2000)}
-      console.log("up")
+      },2000)
+      console.log("溜了溜了")
+      }
     },
   methods:{
    change(){
@@ -181,9 +210,22 @@ export default {
       })
       }
     },
-    
+    city(){    //定义获取城市方法
+        const geolocation = new BMap.Geolocation();
+        var _this = this
+        geolocation.getCurrentPosition(function getinfo(position){
+            let city = position.address.city;             //获取城市信息
+            let province = position.address.province;    //获取省份信息
+            _this.LocationCity = city
+        }, function(e) {
+            _this.LocationCity = "定位失败"
+        }, {provider: 'baidu'});		
+        },
     onClickLeft(){
-      this.$router.back()
+      this.state='待接单',
+      this.dan='立即接单',
+      this.btn_color="#26a5f1",
+      this.iscc=true
     },
     onRead(file) {
       console.log(file)
