@@ -106,7 +106,7 @@
 }
 .photo{
   width: 100%;
-  height: 18rem;
+  height: 17rem;
 }
 .photograph{
   width:30%;
@@ -121,6 +121,17 @@
 .van-uploader{
  top:4rem;
 }
-.cc{
+.disnone{
   display: none;
+}
+.over{
+  text-align: left;
+  padding:0 2rem;
+}
+.van-steps{
+  margin-top:1rem
+}
+.van-hairline{
+  padding: 0.5rem;
+  border-bottom: 1px solid #d1d1d1
 }

@@ -47,7 +47,7 @@
               <p style="text-align:left">七星广场</p>     
             </div>
             <span>
-              <i class="van-icon van-icon-phone-o"></i>
+              <i class="van-icon van-icon-phone-o" @click="phoneCall('10000')"></i>
             </span>
           </div>
         </div>
@@ -57,30 +57,31 @@
           <p style="text-align:left">消控岗-七星广场</p>
         </div>
      </div>
-     <div :class="{cc:iscc}">
+     <div :class="{disnone:isshow}" class="over">
+       <h3>订单操作记录：</h3>
        <van-steps direction="vertical" :active="0">
         <van-step>
-          <h3>订单完成，操作人：</h3>
+          <h3>订单完成，操作人：{{}}</h3>
           <p>{{}}</p>
         </van-step>
         <van-step>
-          <h3>验收完成，操作人：</h3>
+          <h3>验收完成，操作人：{{}}</h3>
           <p>{{}}</p>
         </van-step>
         <van-step>
-          <h3>服务完成，操作人：</h3>
+          <h3>服务完成，操作人：{{}}</h3>
           <p>{{}}</p>
         </van-step>
         <van-step>
-          <h3>服务开始，操作人：</h3>
+          <h3>服务开始，操作人：{{}}</h3>
           <p>{{}}</p>
         </van-step>
         <van-step>
-          <h3>确认接单，操作人：</h3>
+          <h3>确认接单，操作人：{{}}</h3>
           <p>{{}}</p>
         </van-step>
         <van-step>
-          <h3>提交订单，操作人：</h3>
+          <h3>提交订单，操作人：{{}}</h3>
           <p>{{}}</p>
         </van-step>
       </van-steps>
@@ -88,8 +89,8 @@
      <van-popup v-model="show" position="bottom" :overlay="true">
       <div class='pop'>
        <p class='pop_t'>
-         <span @click="aa">确定</span>
-         <span @click="bb">取消</span>
+         <span @click="yes">确定</span>
+         <span @click="no">取消</span>
        </p>
        <p class="pop_m">
          <i class="van-icon van-icon-location-o"><!--定位--></i>
@@ -139,14 +140,14 @@ export default {
       dan:'立即接单',
       btn_color:"#26a5f1",
       show:false,
-      iscc:true,
+      isshow:true,
       timer: null,
       LocationCity:"正在定位",
       location: null
      }
   },
   mounted(){
-      this.city()    //触发获取城市方法
+      this.city()  //触发获取城市方法
       let _this = this
       var geolocation = new BMap.Geolocation()
       geolocation.getCurrentPosition(function(r) {
@@ -174,7 +175,7 @@ export default {
         this.timer=setTimeout(()=>{
         this.state='已完成'
         this.dan='订单已完成'
-        this.iscc=false
+        this.isshow=false
       },2000)
       console.log("溜了溜了")
       }
@@ -210,7 +211,7 @@ export default {
       })
       }
     },
-    city(){    //定义获取城市方法
+    city(){ //定义获取城市方法
         const geolocation = new BMap.Geolocation();
         var _this = this
         geolocation.getCurrentPosition(function getinfo(position){
@@ -225,21 +226,25 @@ export default {
       this.state='待接单',
       this.dan='立即接单',
       this.btn_color="#26a5f1",
-      this.iscc=true
+      this.isshow=true
     },
     onRead(file) {
       console.log(file)
     },
-    aa(){
-    this.show=false,
-    this.dan='结束服务'
-    this.state='服务中'
+    phoneCall: function (msg) {
+      console.log(msg)
+      window.location.href="tel:10000"
     },
-    bb(){
-    this.show=false
+    yes(){
+      this.show=false,
+      this.dan='结束服务'
+      this.state='服务中'
+      },
+    no(){
+      this.show=false
+      }
     }
-  }
-}
+ }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
